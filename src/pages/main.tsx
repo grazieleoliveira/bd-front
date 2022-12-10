@@ -1,18 +1,19 @@
 import bgImg from "../assets/images/pokedex-screen-1-fixed.png";
+import { EPages, IPageDefaultProps } from "../types";
 
-export function MainPage() {
+export function MainPage({ setPage }: IPageDefaultProps) {
 
 // TODO: Add the code to handle the button clicks
   const handleRegister = () => {
-    console.log("Register");
+    setPage(EPages.MODIFY_POKEMON)
   };
 
   const handleList = () => {
-    console.log("List");
+    setPage(EPages.LIST_POKEMON)
   };
 
   const handleModify = () => {
-    console.log("Modify");
+    setPage(EPages.MODIFY_POKEMON)
   };
 
   return (
@@ -39,9 +40,9 @@ export function MainPage() {
           gap: "6%",
         }}
       >
-        <button>Registrar</button>
-        <button>Listar</button>
-        <button>Modificar</button>
+        <button onClick={handleRegister}>Registrar</button>
+        <button onClick={handleList}>Listar</button>
+        <button onClick={handleModify}>Modificar</button>
       </div>
     </div>
   );
