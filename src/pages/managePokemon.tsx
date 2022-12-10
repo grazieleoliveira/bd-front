@@ -47,6 +47,7 @@ export function ManagePokemon({ setPage, type }: Required<IPageDefaultProps>) {
 
   const handleSend = () => {
     // se o tipo da pagina for MODIFY_POKEMON, fazer request de PUT, se for register fazer o POST. 
+    // limpar estado e voltar pra tela principal se o envio for feito feito com sucesso
     console.log(info);
   }
 
