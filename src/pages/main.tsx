@@ -25,8 +25,9 @@ export function MainPage({ setPage }: IPageDefaultProps) {
         height: "100vh",
         backgroundSize: "contain",
         backgroundRepeat: "no-repeat",
-        backgroundColor: "red",
+        backgroundColor: "#ef4a46",
         backgroundPosition: "center",
+        
       }}
     >
       <div
