@@ -10,7 +10,9 @@ function App() {
     <>
       {page === EPages.MAIN && <MainPage setPage={setPage} />}
       {page === EPages.LIST_POKEMON && <ListPokemon setPage={setPage} />}
-      {page === EPages.MODIFY_POKEMON && <ManagePokemon setPage={setPage} />}
+      {(page === EPages.MODIFY_POKEMON || page === EPages.REGISTER_POKEMON) && (
+        <ManagePokemon setPage={setPage} type={page} />
+      )}
     </>
   );
 }

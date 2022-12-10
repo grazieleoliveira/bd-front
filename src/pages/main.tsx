@@ -1,11 +1,12 @@
 import bgImg from "../assets/images/pokedex-screen-1-fixed.png";
+import { Button } from "../components/Button";
 import { EPages, IPageDefaultProps } from "../types";
 
 export function MainPage({ setPage }: IPageDefaultProps) {
 
 // TODO: Add the code to handle the button clicks
   const handleRegister = () => {
-    setPage(EPages.MODIFY_POKEMON)
+    setPage(EPages.REGISTER_POKEMON)
   };
 
   const handleList = () => {
@@ -36,14 +37,14 @@ export function MainPage({ setPage }: IPageDefaultProps) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          width: "80%",
+          width: "85%",
           paddingTop: "22%",
-          gap: "6%",
+          gap: "3vmin",
         }}
       >
-        <button onClick={handleRegister}>Registrar</button>
-        <button onClick={handleList}>Listar</button>
-        <button onClick={handleModify}>Modificar</button>
+        <Button onClick={handleRegister}>Registrar</Button>
+        <Button onClick={handleList}>Listar</Button>
+        <Button onClick={handleModify}>Modificar</Button>
       </div>
     </div>
   );

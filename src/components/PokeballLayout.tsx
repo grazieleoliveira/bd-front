@@ -6,7 +6,8 @@ export const PokeballLayout = ({ children }: React.PropsWithChildren) => {
     <div
       style={{
         display: "flex",
-        backgroundImage: "linear-gradient(90deg, rgba(193,32,38,1) 50%, rgba(255,255,255,1) 50%)",
+        backgroundImage:
+          "linear-gradient(90deg, rgba(193,32,38,1) 71%, rgba(0,0,0,1) 71.8%,rgba(0,0,0,1) 74%, rgba(255,255,255,1) 73%)",
         zIndex: -1,
         width: "100vw",
         height: "100vh",
