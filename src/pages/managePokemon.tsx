@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { Button } from "../components/Button";
+import { CloseButton } from "../components/CloseButton";
 import { Input } from "../components/Input";
 import { PokeballLayout } from "../components/PokeballLayout";
 import { EPages, IPageDefaultProps } from "../types";
@@ -46,10 +47,10 @@ export function ManagePokemon({ setPage, type }: Required<IPageDefaultProps>) {
   };
 
   const handleSend = () => {
-    // se o tipo da pagina for MODIFY_POKEMON, fazer request de PUT, se for register fazer o POST. 
+    // se o tipo da pagina for MODIFY_POKEMON, fazer request de PUT, se for register fazer o POST.
     // limpar estado e voltar pra tela principal se o envio for feito feito com sucesso
     console.log(info);
-  }
+  };
 
   const handleInput = (evt: ChangeEvent<HTMLInputElement>) => {
     switch (evt.target.id) {
@@ -78,22 +79,7 @@ export function ManagePokemon({ setPage, type }: Required<IPageDefaultProps>) {
           paddingTop: "15vmin",
         }}
       >
-        <button
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            outline: "none",
-            cursor: "pointer",
-            background: "transparent",
-            border: "none",
-            fontWeight: "bold",
-            fontSize: "5vmin",
-          }}
-          onClick={handleGoBack}
-        >
-          X
-        </button>
+        <CloseButton onClick={handleGoBack} />
         <div
           style={{
             alignItems: "center",
@@ -108,11 +94,7 @@ export function ManagePokemon({ setPage, type }: Required<IPageDefaultProps>) {
           <Input id="name" placeholder="Nome" onChange={handleInput} />
           <Input id="weight" placeholder="Peso" onChange={handleInput} />
           <Input id="type" placeholder="Tipo" onChange={handleInput} />
-          <Input
-            id="eggGroup"
-            placeholder="Egg Group"
-            onChange={handleInput}
-          />
+          <Input id="eggGroup" placeholder="Egg Group" onChange={handleInput} />
         </div>
         <div
           style={{

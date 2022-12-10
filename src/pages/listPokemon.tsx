@@ -1,8 +1,9 @@
+import { CloseButton } from "../components/CloseButton";
 import { PokeballLayout } from "../components/PokeballLayout";
 import { EPages, IPageDefaultProps } from "../types";
 
 export function ListPokemon({ setPage }: IPageDefaultProps) {
-  const handlePress = () => {
+  const handleGoBack = () => {
     setPage(EPages.MAIN);
   };
 
@@ -12,9 +13,11 @@ export function ListPokemon({ setPage }: IPageDefaultProps) {
         style={{
           display: "flex",
           flexDirection: "column",
+          paddingLeft: "15vmin",
+          paddingTop: "15vmin",
         }}
       >
-        <button onClick={handlePress}>GO BACK</button>
+        <CloseButton onClick={handleGoBack}/>
         <h1>LIST</h1>
       </div>
     </PokeballLayout>
