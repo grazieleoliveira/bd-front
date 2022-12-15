@@ -44,7 +44,6 @@ export function MainPage({ setPage }: IPageDefaultProps) {
       >
         <Button onClick={handleRegister}>Registrar</Button>
         <Button onClick={handleList}>Listar</Button>
-        <Button onClick={handleModify}>Modificar</Button>
       </div>
     </div>
   );
