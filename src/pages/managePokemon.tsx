@@ -1,13 +1,15 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button } from "../components/Button";
 import { CloseButton } from "../components/CloseButton";
 import { Input } from "../components/Input";
 import { PokeballLayout } from "../components/PokeballLayout";
 import { EPages, IPageDefaultProps } from "../types";
 import axios from "axios";
-import { TEggGroup, TPokemon, TPokemonType } from "../types/pokemon";
+import { TPokemon } from "../types/pokemon";
 import { BASE_URL } from "../constants";
 import Select, { ActionMeta } from "react-select";
+import { normalizeEggGroups, normalizeTypes } from "../helpers/parser";
+import { usePokemon } from "../contexts/pokemon/context";
 
 interface IParams {
   title: string;
@@ -62,38 +64,8 @@ const INITIAL_INFO_VALUES = {
 
 export function ManagePokemon({ setPage, type }: Required<IPageDefaultProps>) {
   const [info, setInfo] = useState<IInfo>(INITIAL_INFO_VALUES);
-  const [eggGroups, setEggGroups] = useState([]);
-  const [types, setTypes] = useState([]);
   const { title, buttonLabel, request } = getParamsAccordingToType(type, info);
-
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL}/egg-group/`)
-      .then((response) => {
-        setEggGroups(
-          response.data.map((item: TEggGroup) => ({
-            value: item.id,
-            label: item.egg_group,
-          }))
-        );
-      })
-      .catch((err) => console.log("err", err));
-
-    axios
-      .get(`${BASE_URL}/types/`)
-      .then((response) => {
-        setTypes(
-          response.data.map((item: TPokemonType) => ({
-            value: item.id,
-            label: item.type,
-          }))
-        );
-        console.log("response", response.data);
-      })
-      .catch((err) => console.log("err", err));
-  }, []);
-
-
+  const { eggGroups, types } = usePokemon();
 
   const handleGoBack = () => {
     setPage(EPages.MAIN);
@@ -116,13 +88,15 @@ export function ManagePokemon({ setPage, type }: Required<IPageDefaultProps>) {
     }
   };
 
-  const handleSelect = (
-    newValue: any,
-    actionMeta: ActionMeta<never>
-  ) => {
+  const handleSelect = (newValue: any, actionMeta: ActionMeta<never>) => {
     switch (actionMeta.name) {
       case "type":
-        setInfo({ ...info, typesIds: [Number(newValue.value)] });
+        setInfo({
+          ...info,
+          typesIds: newValue.map(
+            (item: { value: number; label: string }) => item.value
+          ),
+        });
         break;
       case "eggGroup":
         setInfo({ ...info, eggGroupId: Number(newValue.value) });
@@ -154,8 +128,19 @@ export function ManagePokemon({ setPage, type }: Required<IPageDefaultProps>) {
         <div style={{ display: "flex", gap: "4vmin", flexDirection: "column" }}>
           <Input id="name" placeholder="Nome" onChange={handleInput} />
           <Input id="weight" placeholder="Peso(kg)" onChange={handleInput} />
-          <Select placeholder="Tipo" name="type" options={types} onChange={handleSelect} />
-          <Select placeholder="EggGroup" name="eggGroup" options={eggGroups} onChange={handleSelect} />
+          <Select
+            placeholder="Tipo"
+            name="type"
+            options={normalizeTypes(types) as any}
+            onChange={handleSelect}
+            isMulti
+          />
+          <Select
+            placeholder="EggGroup"
+            name="eggGroup"
+            options={normalizeEggGroups(eggGroups) as any}
+            onChange={handleSelect}
+          />
         </div>
         <div
           style={{

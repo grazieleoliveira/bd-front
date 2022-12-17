@@ -6,9 +6,11 @@ export const Button = ({
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >) => {
+  const {style, ...rest} = props;
   return (
       <button
         style={{
+          ...style,
           background: "red",
           cursor: "pointer",
           color: "#fff",
@@ -17,7 +19,7 @@ export const Button = ({
           borderRadius: '2.5vmin',
           minWidth: '20vmin',
         }}
-        {...props}
+        {...rest}
       >
         {props.children}
       </button>
