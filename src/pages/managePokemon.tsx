@@ -17,7 +17,7 @@ interface IParams {
   request: () => Promise<void>;
 }
 
-interface IInfo {
+export interface IInfo {
   name: string | undefined;
   weight: number | undefined;
   typesIds: number[] | undefined;
@@ -55,8 +55,8 @@ const getParamsAccordingToType = (type: EPages, info: IInfo): IParams => {
   };
 };
 
-const INITIAL_INFO_VALUES = {
-  name: "",
+export const INITIAL_INFO_VALUES = {
+  name: undefined,
   weight: undefined,
   typesIds: undefined,
   eggGroupId: undefined,

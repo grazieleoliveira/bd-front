@@ -1,3 +1,4 @@
+import { IInfo } from "../pages/managePokemon";
 import { request } from "../utils/request";
 
 export default class PokemonService {
@@ -26,6 +27,14 @@ export default class PokemonService {
     return request({
       url: "/pokemon/",
       method: "POST",
+    });
+  }
+
+  static editPokemon(data: IInfo) {
+    return request({
+      url: "/pokemon/",
+      method: "PUT",
+      data,
     });
   }
 
